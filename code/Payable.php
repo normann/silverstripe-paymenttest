@@ -30,7 +30,6 @@ class Payable extends DataObjectDecorator {
 		}
 
 		$payment = new DPSPayment();
-		$payment->ID = 15;
 		$payment->Amount->Amount = $this->owner->Amount->Amount;
 		$payment->Amount->Currency = $this->owner->Amount->Currency;
 		
