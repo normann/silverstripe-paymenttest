@@ -21,6 +21,10 @@ div#objects div.object {
 		height: 9em;
 	}
 	
+	div#objects div.object div.ebookoverview{
+		height: 5em;
+	}
+	
 div.clear {
 	clear: both;
 	display: block;

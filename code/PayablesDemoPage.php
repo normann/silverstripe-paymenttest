@@ -23,6 +23,10 @@ class PayablesDemoPage_Controller extends Page_Controller {
 		return DataObject::get('MovieTicket');
 	}
 	
+	function Ebooks() {
+		return DataObject::get('Ebook');
+	}
+	
 	function payfor() {
 		$object = $this->Object();
 		$content = $object->renderWith($object->ClassName."_payable");

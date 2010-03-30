@@ -1,4 +1,3 @@
-
 <div id="objects">
 	<% if Products %>
 		<% control Products %>

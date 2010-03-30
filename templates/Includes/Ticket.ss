@@ -10,6 +10,7 @@
 		<% control Theatre %>
 			<div class="description">$Description.Summary(35)</div>
 		<% end_control %>
-		<br /><a class="button" href="$PayableLink">Buy Now</a>
+		<br />
+		<a class="button" href="$PayableLink">Buy Now</a>
 	<% end_if %>
 </div>

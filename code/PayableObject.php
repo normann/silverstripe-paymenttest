@@ -87,22 +87,86 @@ class Donation extends DataObject {
 class Ebook extends DataObject {
 	static $db = array(
 		'Title' => 'Varchar(256)',
-		'Summury' => 'HTMLText',
+		'Summary' => 'HTMLText',
 	);
 	
 	static $has_one = array(
 		'CoverPhoto' => 'CoverPhoto',
+		'File' => 'File',
 	);
 	
 	static $many_many = array(
 		'Authors' => 'Author'
 	);
+	
+	function getCMSFields(){
+		$fields = parent::getCMSFields();
+		$fields->removeByName('Authors');
+		
+		$authors = DataObject::get('Author');
+		$fields->addFieldToTab('Root.Main',
+			new CheckboxSetField("Authors", "Authors", $authors, $this->Authors())
+		);
+		
+		return $fields;
+	}
+	
+	function getPaymentFields() {
+		$fields = new FieldSet(
+			new HeaderField("Enter your details", 4),
+			new TextField("FirstName", "First Name"),
+			new EmailField("Email", "Email")
+		);
+		return $fields;
+	}
+	
+	function getPaymentFieldRequired() {
+		return array(
+			'FirstName',
+			'Email',
+		);
+	}
+	
+	function getMerchantReference(){
+		$authors = $this->Authors();
+		$authorstitle = "";
+		if($authors->count()){
+			foreach($authors as $author){
+				$authorTitles[] = $author->Name;
+			}
+			$authorstitle = implode(", ", $authorTitles);
+		}
+		if($authorstitle){
+			return substr("Ebook: ".$this->Title." by ".$authorstitle, 0, 63);
+		}else {
+			return substr("Ebook: ".$this->Title.", ".$this->Summary, 0, 63);
+		}
+	}
+	
+	function ConfirmationMessage(){
+		$authors = $this->Authors();
+		$authorstitle = "";
+		if($authors->count()){
+			foreach($authors as $author){
+				$authorTitles[] = $author->Name;
+			}
+			$authorstitle = implode(", ", $authorTitles);
+		}
+		
+		$message = "<h5>This is a confirmation of your Ebook: </h5><br /><h6><a href=\"".$this->File()->Link()."\">".$this->Title."</a></h6>";
+		if($authorstitle){
+			$message .= "<br />by ".$authorstitle;
+		}
+		$message .= "<p>".$this->Summary."</p>";
+
+		return $message;
+	}
 }
 
 class CoverPhoto extends Image {
 	function generateFrontImage(GD $gd) {
 		$gd->setQuality(90);
-		return $gd->croppedResize(160,160);
+		return $gd->croppedResize(120,160);
 	}
 }
 

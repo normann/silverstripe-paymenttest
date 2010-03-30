@@ -32,6 +32,11 @@
 		
 		<div class="clear"></div>
 		
+		<div class="section">
+			<h4>Downloadable Ebook</h4>
+			<% include Ebooks %>
+		</div>
+		
 	<% if Menu(2) %>
 		</div>
 	<% end_if %>
