@@ -54,6 +54,34 @@ class ProductImage extends Image {
 }
 
 class Donation extends DataObject {
+	function getPaymentFields() {
+		$fields = new FieldSet(
+			new HeaderField("Enter your details", 4),
+			new TextField("FirstName", "First Name"),
+			new TextField("Surname", "Last Name"),
+			new EmailField("Email", "Email"),
+			$money = new MoneyField('Amount', '')
+		);
+		$money->allowedCurrencies = DPSAdapter::$allowed_currencies;
+		return $fields;
+	}
+	
+	function getPaymentFieldRequired() {
+		return array(
+			'FirstName',
+			'Surname',
+			'Email',
+			'Amount'
+		);
+	}
+	
+	function getMerchantReference(){
+		return substr("Donation ".$this->Amount->Nice()."(".$this->Amount->Currency.")", 0, 63);
+	}
+	
+	function ConfirmationMessage(){
+		return $message = "<h5>This is a confirmation of your donation: </h5><br /><h6>".$this->Amount->Nice()."(".$this->Amount->Currency.")</h6>";
+	}
 }
 
 class Ebook extends DataObject {

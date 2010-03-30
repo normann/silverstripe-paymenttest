@@ -15,6 +15,9 @@ class PayablesDemoPage_Controller extends Page_Controller {
 		return DataObject::get('Product');
 	}
 	
+	function Donation() {
+		return singleton('Donation');
+	}
 	function payfor() {
 		$object = $this->Object();
 		$content = $object->renderWith($object->ClassName."_payable");
@@ -41,10 +44,19 @@ class PayablesDemoPage_Controller extends Page_Controller {
 	}
 	
 	function Object() {
-		if(isset($this->URLParams['ID']) && isset($this->URLParams['OtherID']))
-			$object = DataObject::get_by_id($this->URLParams['ID'], $this->URLParams['OtherID']);
-		else
-			$object = DataObject::get_by_id($_REQUEST['ObjectClass'], $_REQUEST['ObjectID']);
+		if(isset($this->URLParams['ID'])){
+			if(isset($this->URLParams['OtherID'])) {
+				$object = DataObject::get_by_id($this->URLParams['ID'], $this->URLParams['OtherID']);
+			}else{
+				$object = singleton($this->URLParams['ID']);
+			}
+		} else if($_REQUEST['ObjectClass']){
+			if($_REQUEST['ObjectID']){
+				$object = DataObject::get_by_id($_REQUEST['ObjectClass'], $_REQUEST['ObjectID']);
+			}else{
+				$object = singleton($_REQUEST['ObjectClass']);
+			}
+		}
 		return $object;
 	}
 	

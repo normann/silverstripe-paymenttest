@@ -11,7 +11,8 @@ class Payable extends DataObjectDecorator {
 	
 	function PayableLink() {
 		$payablesPage = DataObject::get_one('PayablesDemoPage');
-		return $payablesPage->Link()."payfor/".$this->owner->ClassName."/".$this->owner->ID;
+		$id = $this->owner->ID?$this->owner->ID:"";
+		return $payablesPage->Link()."payfor/".$this->owner->ClassName."/".$id;
 	}
 	
 	function ConfirmLink($payment) {
@@ -20,6 +21,9 @@ class Payable extends DataObjectDecorator {
 	}
 	
 	function processDPSPayment($data, $form) {
+		$form->saveInto($this->owner);
+		$this->owner->write();
+		
 		if(!$member = DataObject::get_one('Member', "\"Email\" = '".$data['Email']."'")){
 			$member = new Member();
 			$form->saveInto($member);

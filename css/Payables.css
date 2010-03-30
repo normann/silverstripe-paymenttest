@@ -48,7 +48,7 @@ div#object_payable {
 }
 form#Form_ObjectForm {
 	width: 40%;
-	float: right;
+	float: left;
 	margin: 1em;
 	padding: 1.5em;
 }
