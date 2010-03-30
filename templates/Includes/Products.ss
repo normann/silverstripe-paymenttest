@@ -1,6 +1,8 @@
 
 <div id="products">
-	<% control Products %>
-		<% include Product %>
-	<% end_control %>
+	<% if Products %>
+		<% control Products %>
+			<% include Product %>
+		<% end_control %>
+	<% end_if %>
 </div>
