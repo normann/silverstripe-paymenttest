@@ -1,22 +1,26 @@
-div#products div.product {
+div.section{
+	margin-bottom: 5em;
+}
+div#objects div.object {
 	width: 26%;
 	margin: 1em;
 	padding: 1.5em;
 	float: left;
 }
 
-	div#products div.product h5.title {
+	div#objects div.object h5.title {
 		margin: 0;
 		height: 4em;
 	}
 	
-	div#products div.product h6.price {
+	div#objects div.object h6.price {
 		margin: 0;
 	}
 
-	div#products div.product div.description{
-		height: 8em;
+	div#objects div.object div.description{
+		height: 9em;
 	}
+	
 div.clear {
 	clear: both;
 	display: block;
@@ -36,7 +40,7 @@ a.button{
 	width: 160px;
 }
 	
-	table#product {
+	table#object {
 		width: 60%;
 	}
 	

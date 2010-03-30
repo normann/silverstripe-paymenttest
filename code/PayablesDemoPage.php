@@ -18,6 +18,11 @@ class PayablesDemoPage_Controller extends Page_Controller {
 	function Donation() {
 		return singleton('Donation');
 	}
+	
+	function Tickets() {
+		return DataObject::get('MovieTicket');
+	}
+	
 	function payfor() {
 		$object = $this->Object();
 		$content = $object->renderWith($object->ClassName."_payable");

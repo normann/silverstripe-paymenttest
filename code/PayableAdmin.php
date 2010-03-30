@@ -8,14 +8,16 @@ class PayableAdmin extends ModelAdmin{
 		"Product",
 		"Donation",
 		"Ebook",
-		"MovieTicket"
+		"MovieTicket",
+		"Theatre"
 	);
 	
 	static $allowed_actions = array(
 		"Product",
 		"Donation",
 		"Ebook",
-		"MovieTicket"
+		"MovieTicket",
+		"Theatre"
 	);
 }
 ?>

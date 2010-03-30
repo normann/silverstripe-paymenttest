@@ -1,5 +1,5 @@
 
-<div id="products">
+<div id="objects">
 	<% if Products %>
 		<% control Products %>
 			<% include Product %>

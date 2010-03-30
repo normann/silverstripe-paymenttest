@@ -11,12 +11,27 @@
 		<h2>$Title</h2>
 	
 		$Content
+		<div class="section">
+			<h4>Online Store</h4>
+			<% include Products %>
+		</div>
 		
-		<h4>On-line Store</h4>
-		<% include Products %>
 		<div class="clear"></div>
-		<h4>Donation On-line</h4>
-		<% include Donation %>
+		
+		<div class="section">
+			<h4>Donation On-line</h4>
+			<% include Donation %>
+		</div>
+		
+		<div class="clear"></div>
+		
+		<div class="section">
+			<h4>Online Ticket Booking</h4>
+			<% include Tickets %>
+		</div>
+		
+		<div class="clear"></div>
+		
 	<% if Menu(2) %>
 		</div>
 	<% end_if %>

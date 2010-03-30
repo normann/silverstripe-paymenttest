@@ -117,11 +117,39 @@ class MovieTicket extends DataObject{
 	static $db = array(
 		'Start' => 'Datetime',
 		'End' => 'Datetime',
+		'MovieTitle' => 'Varchar',
 	);
 	static $has_one = array(
-		'BookedBy' => 'Member',
 		'Theatre' => 'Theatre'
 	);
+	
+	function getPaymentFields() {
+		$fields = new FieldSet(
+			new HeaderField("Enter your details", 4),
+			new TextField("FirstName", "First Name"),
+			new TextField("Surname", "Last Name"),
+			new EmailField("Email", "Email")
+		);
+		return $fields;
+	}
+	
+	function getPaymentFieldRequired() {
+		return array(
+			'FirstName',
+			'Surname',
+			'Email',
+		);
+	}
+	
+	function getMerchantReference(){
+		return substr("Ticket for ".$this->MovieTitle." in ".$this->Theatre()->Title, 0, 63);
+	}
+	
+	function ConfirmationMessage(){
+		$message = "<h5>This is a confirmation of your ticket for: </h5><br /><h6>".$this->MovieTitle."(".$this->Theatre()->Title." ".$this->Start." - ".$this->End.")</h6>";
+		$message .= $this->Theatre()->renderWith('Theatre');
+		return $message;
+	}
 }
 
 class Theatre extends DataObject{
@@ -129,6 +157,8 @@ class Theatre extends DataObject{
 		'Title' => 'Varchar(128)',
 		'Street' => 'Varchar',
 		'CityTown' => 'Varchar',
+		'Description' => 'HTMLText',
+		'OtherInfo' => 'HTMLText',
 	);
 }
 ?>
