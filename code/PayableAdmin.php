@@ -6,7 +6,7 @@ class PayableAdmin extends ModelAdmin{
 	
 	static $managed_models = array(
 		"Product",
-		"Donation",
+		//"Donation",
 		"MovieTicket",
 		"Theatre",
 		"Ebook",
@@ -15,7 +15,7 @@ class PayableAdmin extends ModelAdmin{
 	
 	static $allowed_actions = array(
 		"Product",
-		"Donation",
+		//"Donation",
 		"MovieTicket",
 		"Theatre",
 		"Ebook",

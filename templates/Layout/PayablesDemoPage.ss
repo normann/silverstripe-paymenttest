@@ -18,12 +18,12 @@
 		
 		<div class="clear"></div>
 		
-		<div class="section">
+		<!--<div class="section">
 			<h4>Donation On-line</h4>
 			<% include Donation %>
 		</div>
 		
-		<div class="clear"></div>
+		<div class="clear"></div>-->
 		
 		<div class="section">
 			<h4>Online Ticket Booking</h4>
