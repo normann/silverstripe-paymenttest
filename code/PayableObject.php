@@ -199,8 +199,9 @@ class Author extends DataObject {
 
 class MovieTicket extends DataObject{
 	static $db = array(
-		'Start' => 'Datetime',
-		'End' => 'Datetime',
+		'StartTime' => 'Varchar',
+		'EndTime' => 'Varchar',
+		'Date' => 'Varchar',
 		'MovieTitle' => 'Varchar',
 	);
 	static $has_one = array(
@@ -230,7 +231,7 @@ class MovieTicket extends DataObject{
 	}
 	
 	function ConfirmationMessage(){
-		$message = "<h5>This is a confirmation of your ticket for: </h5><br /><h6>".$this->MovieTitle."(".$this->Theatre()->Title." ".$this->Start." - ".$this->End.")</h6>";
+		$message = "<h5>This is a confirmation of your ticket for: </h5><br /><h6>".$this->MovieTitle."</h6><h6>".$this->Theatre()->Title."</h6><h6>Time: from ".$this->StartTime." to ".$this->EndTime."<br />Date: ".$this->Date."</h6>";
 		$message .= $this->Theatre()->renderWith('Theatre');
 		return $message;
 	}
