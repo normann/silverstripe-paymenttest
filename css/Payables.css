@@ -1,8 +1,9 @@
-
+body {
+	font-size: 12px !important;
+	color: #666666 !important;
+}
 div.section{
 	margin-bottom: 5em;
-	color: #666666;
-	font-size: 10px;
 }
 div#objects div.object {
 	width: 26%;
@@ -56,6 +57,7 @@ div#object_payable {
 	float: left;
 	margin: 1em;
 	padding: 1.5em;
+	color: #666666;
 }
 form#Form_ObjectForm {
 	width: 40%;

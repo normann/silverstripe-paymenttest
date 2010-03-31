@@ -51,6 +51,12 @@ class ProductImage extends Image {
 		$gd->setQuality(90);
 		return $gd->croppedResize(160,160);
 	}
+	
+	//Temporarily work aroud issue in subsite module 
+	function onBeforeWrite(){
+		parent::onBeforeWrite();
+		$this->SubsiteID = 0;
+	}
 }
 
 class Donation extends DataObject {
@@ -92,7 +98,7 @@ class Ebook extends DataObject {
 	
 	static $has_one = array(
 		'CoverPhoto' => 'CoverPhoto',
-		'File' => 'File',
+		'File' => 'EbookFile',
 	);
 	
 	static $many_many = array(
@@ -163,10 +169,24 @@ class Ebook extends DataObject {
 	}
 }
 
+class EbookFile extends File{
+	//Temporarily work aroud issue in subsite module 
+	function onBeforeWrite(){
+		parent::onBeforeWrite();
+		$this->SubsiteID = 0;
+	}
+}
+
 class CoverPhoto extends Image {
 	function generateFrontImage(GD $gd) {
 		$gd->setQuality(90);
 		return $gd->croppedResize(120,160);
+	}
+	
+	//Temporarily work aroud issue in subsite module 
+	function onBeforeWrite(){
+		parent::onBeforeWrite();
+		$this->SubsiteID = 0;
 	}
 }
 
