@@ -2,6 +2,7 @@
 div.section{
 	margin-bottom: 5em;
 	color: #666666;
+	font-size: 12px;
 }
 div#objects div.object {
 	width: 26%;
@@ -63,12 +64,22 @@ form#Form_ObjectForm {
 	padding: 1.5em;
 }
 
+	form#Form_ObjectForm label{
+		margin: 0;
+	}
 	form#Form_ObjectForm div.middleColumn{
 		padding: 0;
 		margin: 0px 0px 5px 0px;
 		background-color: #ffffff;
 		width: 20em;
 	}
+	form#Form_ObjectForm span.message{
+		clear: both;
+		display: block;
+		margin: 0px 0px 5px 0px;
+		width: 12em;
+	}
+	
 
 	form#Form_ObjectForm input.text,
 	form#Form_ObjectForm textarea,
