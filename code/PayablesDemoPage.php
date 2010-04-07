@@ -1,6 +1,20 @@
 <?php
 
 class PayablesDemoPage extends Page {
+	
+	function requireDefaultRecords() {
+		$paymentDemoPage = DataObject::get_one('PayablesDemoPage');
+		if(!($paymentDemoPage && $paymentDemoPage->exists())) {
+			$paymentDemoPage = new PayablesDemoPage();
+			$paymentDemoPage->Title = _t('PayablesDemoPage.DEFAULTPAYMENTSDEMOPAGETITLE', 'Payments');
+			$paymentDemoPage->Content = _t('PayablesDemoPage.DEFAULTPAYMENTSDEMOPAGECONTENT', '<p>The SilverStripe Payment Module can be used for different types of  products, for example, a physical product, a download, or a donation.</p>
+			<p>To add or edit a product, go the the <a href="admin/payables/">Payables section in the CMS</a>.</p>');
+			$paymentDemoPage->Status = 'New page';
+			$paymentDemoPage->write();
+			
+			DB::alteration_message('Payments demo page created', 'created');
+		}
+	}
 
 }
 
