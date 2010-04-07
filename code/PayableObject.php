@@ -335,6 +335,12 @@ class MovieTicket extends DataObject{
 		'Theatre' => 'Theatre'
 	);
 	
+	static $summary_fields = array(
+		'Date'=>'Date',
+		'MovieTitle' => 'Movie',
+		'Theatre.Title' => 'Theatre'
+	);
+	
 	function requireDefaultRecords() {
 		parent::requireDefaultRecords();
 

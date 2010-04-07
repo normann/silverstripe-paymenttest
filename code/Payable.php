@@ -9,6 +9,11 @@ class Payable extends DataObjectDecorator {
 		);
 	}
 	
+	function updateCMSFields(&$fields){
+		$money= $fields->datafieldByName('Amount');
+		$money->allowedCurrencies = DPSAdapter::$allowed_currencies;
+	}
+	
 	function PayableLink() {
 		$payablesPage = DataObject::get_one('PayablesDemoPage');
 		$id = $this->owner->ID?$this->owner->ID:"";
