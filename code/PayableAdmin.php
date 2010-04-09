@@ -5,7 +5,7 @@ class PayableAdmin extends ModelAdmin{
 	static $url_segment = "payables";
 	
 	static $managed_models = array(
-		"Product",
+		"ProductObject",
 		//"Donation",
 		"MovieTicket",
 		"Theatre",
@@ -14,7 +14,7 @@ class PayableAdmin extends ModelAdmin{
 	);
 	
 	static $allowed_actions = array(
-		"Product",
+		"ProductObject",
 		//"Donation",
 		"MovieTicket",
 		"Theatre",

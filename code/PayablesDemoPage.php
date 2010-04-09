@@ -26,7 +26,7 @@ class PayablesDemoPage_Controller extends Page_Controller {
 	}
 	
 	function Products() {
-		return DataObject::get('Product');
+		return DataObject::get('ProductObject');
 	}
 	
 	function Donation() {

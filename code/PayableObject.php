@@ -1,6 +1,35 @@
 <?php
 
-class Product extends DataObject {
+interface PayableObjectInterface{
+	/**
+	 * get all the fields that make the payment form when buying this object
+	 *
+	 * @return FieldSet
+	 */
+	function getPaymentFields();
+	
+	/**
+	 * get all the required fields that will make them mandatory in the payment form when buying this object
+	 *
+	 * @return array;
+	 */
+	function getPaymentFieldRequired();
+	
+	/**
+	 * get text that merchant like to use as reference in their bill/invoice.
+	 *
+	 * @return string, less than 64 bits for DPS payment
+ 	 */
+	function getMerchantReference();
+	
+	/**
+	 * get Confirmation message that could be used in the successful page after payment being paid
+	 *
+	 * @return string, in HTML style.
+	 */
+	function ConfirmationMessage();	
+}
+class ProductObject extends DataObject implements PayableObjectInterface{
 	static $db = array(
 		'Title' => 'Varchar(256)',
 		'Description' => 'HTMLText',
@@ -16,9 +45,9 @@ class Product extends DataObject {
 	function requireDefaultRecords() {
 		parent::requireDefaultRecords();
 		
-		$product1 = DataObject::get_one('Product', "\"Title\" = 'Daft Robot'");
+		$product1 = DataObject::get_one('ProductObject', "\"Title\" = 'Daft Robot'");
 		if(!($product1 && $product1->exists())) {
-			$product1 = new Product();
+			$product1 = new ProductObject();
 			$product1->Title = 'Daft Robot';
 			$product1->Description = <<<HTML
 			<p>DVD, 2010<br />Striped Silver Pictures</p>
@@ -45,9 +74,9 @@ HTML;
 			DB::alteration_message('product example \'Daft Robot\'', 'created');
 		}
 		
-		$product2 = DataObject::get_one('Product', "\"Title\" = 'Bloody Knife'");
+		$product2 = DataObject::get_one('ProductObject', "\"Title\" = 'Bloody Knife'");
 		if(!($product2 && $product2->exists())) {
-			$product2 = new Product();
+			$product2 = new ProductObject();
 			$product2->Title = 'Bloody Knife';
 			$product2->Description = <<<HTML
 			<p>DVD, 1978<br />SilverSplatter Films</p>
@@ -123,7 +152,7 @@ class ProductImage extends Image {
 	}
 }
 
-class Donation extends DataObject {
+class Donation extends DataObject implements PayableObjectInterface{
 	function getPaymentFields() {
 		$fields = new FieldSet(
 			new HeaderField("Enter your details", 4),
@@ -154,7 +183,7 @@ class Donation extends DataObject {
 	}
 }
 
-class Ebook extends DataObject {
+class Ebook extends DataObject implements PayableObjectInterface{
 	static $db = array(
 		'Title' => 'Varchar(256)',
 		'Summary' => 'HTMLText',
@@ -324,7 +353,7 @@ class Author extends DataObject {
 	);
 }
 
-class MovieTicket extends DataObject{
+class MovieTicket extends DataObject implements PayableObjectInterface{
 	static $db = array(
 		'StartTime' => 'Varchar',
 		'EndTime' => 'Varchar',
