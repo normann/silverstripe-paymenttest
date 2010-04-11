@@ -25,7 +25,7 @@ class PayablesDemoPage_Controller extends Page_Controller {
 		Requirements::css("payment-test/css/Payables.css");
 	}
 	
-	function Products() {
+	function ProductObjects() {
 		return DataObject::get('ProductObject');
 	}
 	
