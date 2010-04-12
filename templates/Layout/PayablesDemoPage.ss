@@ -13,7 +13,7 @@
 		$Content
 		<div class="section">
 			<h4>Online Store</h4>
-			<% include Products %>
+			<% include ProductObjects %>
 		</div>
 		
 		<div class="clear"></div>
